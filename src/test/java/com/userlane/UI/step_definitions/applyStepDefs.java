@@ -10,6 +10,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import com.github.javafaker.Faker;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -76,7 +77,9 @@ public class applyStepDefs {
     }
     @Then("the user should able to navigate application page")
     public void the_user_should_able_to_navigate_application_page() {
-        System.out.println("then completed");
+        String actualMsg = verifyPage.applicationMsg.getText();
+        String expectedMsg = "Application submitted!";
+        Assert.assertEquals(expectedMsg,actualMsg);
     }
 
 
