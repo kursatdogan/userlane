@@ -28,8 +28,15 @@ public class InfoPage extends BasePage {
 @FindBy (xpath = "//input[(@class='card-field-input')]")
     public List<WebElement>  inputAvabilityAndSlary;
 
-@FindBy (xpath = "//input[(@type='radio')]")
-    public List<WebElement> inputRadioBtn;
+@FindBy (xpath = "(//input[@type='radio'])[2]")
+    public WebElement placeRadioBtn;
+
+    @FindBy (xpath = "(//input[@type='radio'])[3]")
+    public WebElement cypressRadioBtn;
+
+    @FindBy (xpath = "//button[@data-qa]")
+    public WebElement submitBtn;
+
 
 @FindBy (xpath = "//input[@type='checkbox']")
     public WebElement policyCheckBox;

@@ -3,6 +3,7 @@ package com.userlane.UI.step_definitions;
 import com.userlane.UI.pages.CareerPage;
 import com.userlane.UI.pages.DescriptionPage;
 import com.userlane.UI.pages.InfoPage;
+import com.userlane.UI.pages.VerifyPage;
 import com.userlane.UI.utilities.ConfigurationReader;
 import com.userlane.UI.utilities.Driver;
 import io.cucumber.java.en.Given;
@@ -24,6 +25,7 @@ public class applyStepDefs {
     CareerPage careerPage = new CareerPage();
     DescriptionPage descriptionPage = new DescriptionPage();
     InfoPage infoPage = new InfoPage();
+    VerifyPage verifyPage = new VerifyPage();
     Faker faker = new Faker();
 
     @Given("the user is on the career page")
@@ -63,15 +65,13 @@ public class applyStepDefs {
         infoPage.inputUrl.get(3).sendKeys(faker.internet().url());
         infoPage.inputAvabilityAndSlary.get(0).sendKeys("4 weeks");
         infoPage.inputAvabilityAndSlary.get(1).sendKeys("**** Euro/Year Gross");
-        infoPage.inputRadioBtn.get(0).click();
-//        Actions actions = new Actions(Driver.get());
-//        actions.moveToElement(infoPage.inputRadioBtn.get(0)).click().perform();
-//        actions.moveToElement(infoPage.inputRadioBtn.get(3)).click().perform();
-//        actions.moveToElement(infoPage.policyCheckBox).click().perform();
-//        Thread.sleep(20000);
-//        infoPage.submitAppBtn.click();
-
-       // actions.moveToElement(infoPage.robotCheckBox).click().perform();
+        WebDriverWait wait = new WebDriverWait(Driver.get(), 10);
+        wait.until(ExpectedConditions.elementToBeClickable(infoPage.placeRadioBtn));
+        wait.until(ExpectedConditions.elementToBeClickable(infoPage.cypressRadioBtn));
+        infoPage.placeRadioBtn.click();
+        infoPage.cypressRadioBtn.click();
+        Thread.sleep(30000);
+        infoPage.submitBtn.click();
 
     }
     @Then("the user should able to navigate application page")
