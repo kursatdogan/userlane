@@ -4,6 +4,7 @@ import com.userlane.UI.pages.CareerPage;
 import com.userlane.UI.pages.DescriptionPage;
 import com.userlane.UI.pages.InfoPage;
 import com.userlane.UI.pages.VerifyPage;
+import com.userlane.UI.utilities.BrowserUtils;
 import com.userlane.UI.utilities.ConfigurationReader;
 import com.userlane.UI.utilities.Driver;
 import io.cucumber.java.en.Given;
@@ -82,7 +83,7 @@ public class applyStepDefs {
         infoPage.placeRadioBtn.click();
         infoPage.cypressRadioBtn.click();
 
-    // I have put here some Thread to handle Capthcha manually
+    // I have put here some Thread to handle Captcha manually
         Thread.sleep(30000);
         infoPage.submitBtn.click();
     }

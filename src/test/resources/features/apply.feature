@@ -1,6 +1,6 @@
 
 Feature: the user should able to apply open QA position
-
+@wip
   Scenario: the user can apply to open position
     Given the user is on the career page
     When the user clicks to open position for the Automation Test Engineer
