@@ -55,8 +55,12 @@ public class applyStepDefs {
     @When("the user enters the necessary information on the info page")
     public void the_user_enters_the_necessary_information_on_the_info_page() throws InterruptedException {
 
-    // Upload the resume from PC
-        infoPage.resumeBtn.sendKeys("C:\\Users\\vdw-Kursat\\Desktop\\Kursat Dogan - Resume.pdf");
+    // Upload the resume dynamically from PC
+        String projectPath = System.getProperty("user.dir");
+        String filePath ="src/test/resources/kursatDoganResume.pdf";
+        String fullPath = projectPath + "/" + filePath;
+
+        infoPage.resumeBtn.sendKeys(fullPath);
 
     // Enter other fake information with the help of javaFaker class
         infoPage.inputName.sendKeys(faker.name().fullName());
