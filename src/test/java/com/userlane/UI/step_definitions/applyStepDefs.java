@@ -96,5 +96,44 @@ public class applyStepDefs {
         Assert.assertEquals(expectedMsg,actualMsg);
     }
 
+    @When("the user does not enter the all necessary information on the info page")
+    public void the_user_does_not_enter_the_all_necessary_information_on_the_info_page() throws InterruptedException {
+
+        // Enter fake information except resume with the help of javaFaker class
+        infoPage.inputName.sendKeys(faker.name().fullName());
+        infoPage.inputEmail.sendKeys(faker.internet().emailAddress());
+        infoPage.inputPhone.sendKeys(faker.phoneNumber().cellPhone());
+        infoPage.inputCompany.sendKeys(faker.company().name());
+        infoPage.inputUrl.get(0).sendKeys(faker.internet().url());
+        infoPage.inputUrl.get(1).sendKeys(faker.internet().url());
+        infoPage.inputUrl.get(2).sendKeys(faker.internet().url());
+        infoPage.inputUrl.get(3).sendKeys(faker.internet().url());
+        infoPage.inputUrl.get(4).sendKeys(faker.internet().url());
+        infoPage.inputAvabilityAndSlary.get(0).sendKeys("4 weeks");
+        infoPage.inputAvabilityAndSlary.get(1).sendKeys("**** Euro/Year Gross");
+
+        // I put some explicit wait here to  click the radio buttons
+        WebDriverWait wait = new WebDriverWait(Driver.get(), 10);
+        wait.until(ExpectedConditions.elementToBeClickable(infoPage.placeRadioBtn));
+        wait.until(ExpectedConditions.elementToBeClickable(infoPage.cypressRadioBtn));
+        infoPage.placeRadioBtn.click();
+        infoPage.cypressRadioBtn.click();
+
+        // Scroll down with JavascriptExecutor to see the Webelement
+        JavascriptExecutor jse = (JavascriptExecutor) Driver.get();
+        jse.executeScript("window.scrollBy(0,750)");
+        // Click to submit application button without proofing you are not robot
+        infoPage.submitBtn.click();
+    }
+
+    @Then("the user sould not able to navigate application page")
+    public void the_user_sould_not_able_to_navigate_application_page() {
+
+        // Verifying that user should see error message when clicks submit button without enter all necessary information
+        String actualMsg = infoPage.errorMsg.getText();
+        String expectedMsg = "✱ Please verify that you are not a robot, and reupload any files.";
+        Assert.assertEquals(expectedMsg,actualMsg);
+    }
+
 
 }

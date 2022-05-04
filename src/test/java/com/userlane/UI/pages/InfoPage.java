@@ -47,5 +47,7 @@ public class InfoPage extends BasePage {
 @FindBy (xpath = "//button[@type='submit']")
     public WebElement submitAppBtn;
 
+@FindBy (xpath = "//p[@class='error-message']")
+    public WebElement errorMsg;
 
 }
